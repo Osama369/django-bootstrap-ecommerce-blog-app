@@ -1,0 +1,37 @@
+<!-- shop/templates/shop/products.html -->
+
+{% extends 'shop/basic.html' %}
+
+{% block css %}
+<!-- Add any specific CSS for the products page if needed -->
+<style>
+  /* Add CSS rules to resize the product images */
+  .product-img {
+    max-width: 200px; /* Set the desired maximum width for the images */
+    height: auto; /* Maintain the original aspect ratio */
+  }
+  .container{
+    padding: 20px 20px;
+  }
+</style>
+{% endblock %}
+
+{% block body %}
+<div class="container">
+  <div class="row">
+    {% for product in products %}
+    <div class="col-md-4 mb-4">
+      <div class="card">
+        <img src="{{ product.image.url }}" alt="{{ product.product_name }}" class="card-img-top" />
+        <div class="card-body">
+          <h5 class="card-title">{{ product.product_name }}</h5>
+          <p class="card-text"><b>Category:</b> {{ product.desc }}</p>
+          <p class="cart-text"><b>price:</b> {{product.price}} <span>$</span></p>
+          <a href="{% url 'product_detail' product.id %}" class="btn btn-primary">View Details</a>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

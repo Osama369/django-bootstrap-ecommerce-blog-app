@@ -1,0 +1,35 @@
+<!-- shop/templates/shop/products_detail.html -->
+
+{% extends 'shop/basic.html' %}
+{% block css %}
+<!-- Add any specific CSS for product detail page if needed -->
+{% endblock %}
+
+{% block body %}
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h2>{{ product.product_name }} Details</h2>
+      <div class="product-details">
+        <div class="row">
+          <div class="col-md-6">
+            <img src="{{ product.image.url }}" alt="{{ product.product_name }}" class="img-fluid" />
+          </div>
+          <div class="col-md-6">
+            <h4>{{ product.product_name }}</h4>
+            <p>Category: {{ product.category }}</p>
+            <p>Price: ${{ product.price }}</p>
+            <p>{{ product.desc }}</p>
+            <form method="post" action="{% url 'add_to_cart' product.id %}">
+              {% csrf_token %}
+              <label for="quantity">Quantity:</label>
+              <input type="number" name="quantity" id="quantity" value="1" min="1" max="10" />
+              <button type="submit" class="btn btn-primary">Add to Cart</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

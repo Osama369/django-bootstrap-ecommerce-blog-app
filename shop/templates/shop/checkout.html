@@ -1,0 +1,59 @@
+<!-- shop/templates/shop/checkout.html -->
+
+{% extends 'shop/basic.html' %}
+
+{% block css %}
+<!-- Add any specific CSS for the checkout page if needed -->
+{% endblock %}
+
+{% block body %}
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h2>Checkout</h2>
+      <form method="post" action="{% url 'process_order' %}">
+        {% csrf_token %}
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Image</th>
+              <th>Product Name</th>
+              <th>Price</th>
+              <th>Quantity</th>
+              <th>Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for item in products_in_cart %}
+            <tr>
+              <td>
+                <img
+                  src="{{ item.product.image.url }}"
+                  alt="{{ item.product.product_name }}"
+                  class="img-fluid"
+                />
+              </td>
+              <td>{{ item.product.product_name }}</td>
+              <td>${{ item.product.price }}</td>
+              <td>{{ item.quantity }}</td>
+              <td>${{ item.total_price }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        <p>Total Price: ${{ total_price }}</p>
+        <!-- Implement your payment options here (e.g., Credit Card, PayPal, etc.) -->
+        <div>
+          <label for="payment_option">Select Payment Option:</label>
+          <select id="payment_option" name="payment_option">
+            <option value="credit_card">Credit Card</option>
+            <option value="paypal">PayPal</option>
+            <!-- Add other payment options if needed -->
+          </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Place Order</button>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

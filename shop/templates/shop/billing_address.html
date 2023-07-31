@@ -1,0 +1,21 @@
+<!-- shop/templates/shop/billing_address.html -->
+
+{% extends 'shop/basic.html' %}
+
+{% block body %}
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h2>Billing Address</h2>
+      <!-- Add a form for the user to enter their billing address here -->
+      <form method="post">
+        {% csrf_token %}
+        <!-- Add form fields for the billing address (e.g., name, address, etc.) -->
+
+        <!-- Add a "Final Checkout" button -->
+        <button type="submit" class="btn btn-primary">Final Checkout</button>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}
