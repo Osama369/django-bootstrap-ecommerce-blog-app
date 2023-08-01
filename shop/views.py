@@ -132,7 +132,7 @@ def index(request):
     return render(request, 'shop/index.html', context)
 
 
-def aboutus(request):
+def about(request):
   return render(request, 'shop/about.html')
 
 def contactus(request):
